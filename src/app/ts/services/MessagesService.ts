@@ -53,6 +53,10 @@ export class MessagesService {
       // 如果create流接收了一个Message对象，那么它会发出一个IMessagesOperation;
       //   updates流会接受这个IMessagesOperation，然后把Message对象添加到messages流中
       .subscribe(this.updates);
+
+    // 订阅create流来监听newMessages流
+    this.newMessages
+      .subscribe(this.create);
   }
 
   // 添加Message的方法
