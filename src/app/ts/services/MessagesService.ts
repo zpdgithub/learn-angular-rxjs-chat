@@ -18,6 +18,9 @@ export class MessagesService {
   // 一组Message对象
   messages: Observable<Message[]>;
 
+  // 操作流，应用于messages流的函数流
+  updates: Subject<any> = new Subject<any>();
+
   // 添加Message的方法
   addMessage(message: Message): void {
     this.newMessages.next(message);
