@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { User, Thread, Message } from '../models';
 
+// 消息操作接口
+interface IMessagesOperation extends Function {
+  (messages: Message[]): Message[];
+}
+
 @Injectable()
 export class MessagesService {
   // newMessages流，每条只发出一次，单个Message对象
