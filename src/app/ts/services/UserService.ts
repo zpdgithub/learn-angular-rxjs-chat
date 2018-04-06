@@ -11,7 +11,7 @@ export class UserService {
   currentUser: Subject<User> = new BehaviorSubject<User>(null); // currentUser流
 
   public setCurrentUser(newUser: User): void {
-    this.currentUser.next(newUser);
+    this.currentUser.next(newUser); // 将新用户发布到流中
   }
 }
 
