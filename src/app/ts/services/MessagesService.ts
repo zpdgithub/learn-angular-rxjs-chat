@@ -4,11 +4,25 @@ import { User, Thread, Message } from '../models';
 
 @Injectable()
 export class MessagesService {
-  // newMessages流，每条只发出一次
+  // newMessages流，每条只发出一次，单个Message对象
   newMessages: Subject<Message> = new Subject<Message>();
+
+  // 一组Message对象
+  messages: Observable<Message[]>;
+
   // 添加Message的方法
   addMessage(message: Message): void {
     this.newMessages.next(message);
+  }
+  // 过滤Message
+  messagesForThreadUser(thread: Thread, user: User): Observable<Message> {
+    return this.newMessages
+      .filter((message: Message) => {
+        // belongs to this thread
+        return (message.thread.id === thread.id) &&
+          // and isn't authored by this user
+          (message.author.id !== user.id);
+      });
   }
 }
 export const messagesServiceInjectables: Array<any> = [
