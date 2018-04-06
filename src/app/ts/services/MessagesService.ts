@@ -21,6 +21,21 @@ export class MessagesService {
   // 操作流，应用于messages流的函数流
   updates: Subject<any> = new Subject<any>();
 
+  constructor() {
+    this.messages = this.updates
+      // watch the updates and accumulate operations on the messages
+      // this.updates.scan创建一个新流，这个流订阅了updates流。scan内部执行的每一次，我们都会得到
+      // 1) 经过累加的messages流
+      // 2) 将要应用的新operation
+      // 然后返回新的Message[]
+      .scan(
+        (messages: Message[], operation: IMessagesOperation) => {
+          return operation(messages);
+        },
+        initialMessages
+      );
+  }
+
   // 添加Message的方法
   addMessage(message: Message): void {
     this.newMessages.next(message);
