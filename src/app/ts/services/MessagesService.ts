@@ -21,6 +21,9 @@ export class MessagesService {
   // 操作流，应用于messages流的函数流
   updates: Subject<any> = new Subject<any>();
 
+  // 动作流
+  create: Subject<Message> = new Subject<Message>();
+
   constructor() {
     this.messages = this.updates
       // watch the updates and accumulate operations on the messages
@@ -37,6 +40,19 @@ export class MessagesService {
       // 在多个订阅者之间共享同一个订阅，并为未来的订阅者重播n个最新的值
       .publishReplay(1)
       .refCount();
+
+    // 对于我们接收并作为输入的每个Message对象来说，都返回IMessagesOperation，它会把这个消息添加到消息列表中
+    // 换句话说，这个流会发出一个函数，这个函数接受Message对象的列表并把这个Message对象添加到消息列表中
+    this.create
+      .map(function (message: Message): IMessagesOperation {
+        return (messages: Message[]) => {
+          return messages.concat(message);
+        };
+      })
+      // 订阅updates流来监听create流
+      // 如果create流接收了一个Message对象，那么它会发出一个IMessagesOperation;
+      //   updates流会接受这个IMessagesOperation，然后把Message对象添加到messages流中
+      .subscribe(this.updates);
   }
 
   // 添加Message的方法
