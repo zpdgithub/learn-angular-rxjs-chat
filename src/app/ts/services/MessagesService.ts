@@ -33,7 +33,10 @@ export class MessagesService {
           return operation(messages);
         },
         initialMessages
-      );
+      )
+      // 在多个订阅者之间共享同一个订阅，并为未来的订阅者重播n个最新的值
+      .publishReplay(1)
+      .refCount();
   }
 
   // 添加Message的方法
