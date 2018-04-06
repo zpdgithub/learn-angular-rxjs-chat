@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { User, Thread, Message } from '../models';
 
+// 初始messages
+const initialMessages: Message[] = [];
+
 // 消息操作接口
 interface IMessagesOperation extends Function {
   (messages: Message[]): Message[];
