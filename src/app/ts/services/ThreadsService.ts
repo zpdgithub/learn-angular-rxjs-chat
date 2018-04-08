@@ -10,6 +10,10 @@ export class ThreadsService {
   // 当前一个Thread的映射（threads流）
   threads: Observable<{ [key: string]: Thread }>;
 
+  // `orderedThreads` contains a newest-first chronological list of threads
+  // 按时间逆序排列的Thread列表
+  orderedThreads: Observable<Thread[]>;
+
   constructor(private messagesService: MessagesService) {
     this.threads = messagesService.messages
       .map((messages: Message[]) => {
@@ -29,6 +33,12 @@ export class ThreadsService {
           }
         });
         return threads;
+      });
+
+    this.orderedThreads = this.threads
+      .map((threadGroups: { [key: string]: Thread }) => {
+        let threads: Thread[] = _.values(threadGroups);
+        return _.sortBy(threads, (t: Thread) => t.lastMessage.sentAt).reverse();
       });
   }
 
