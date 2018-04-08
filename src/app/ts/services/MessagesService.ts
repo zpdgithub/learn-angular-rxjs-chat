@@ -23,6 +23,8 @@ export class MessagesService {
 
   // 动作流
   create: Subject<Message> = new Subject<Message>();
+  markThreadAsRead: Subject<any> = new Subject<any>();  // 标记Thread为已读
+
 
   constructor() {
     this.messages = this.updates
@@ -57,6 +59,24 @@ export class MessagesService {
     // 订阅create流来监听newMessages流
     this.newMessages
       .subscribe(this.create);
+
+    // similarly, `markThreadAsRead` takes a Thread and then puts an operation
+    // on the `updates` stream to mark the Messages as read
+    this.markThreadAsRead
+      .map((thread: Thread) => {
+        return (messages: Message[]) => {
+          return messages.map((message: Message) => {
+            // note that we're manipulating `message` directly here. Mutability
+            // can be confusing and there are lots of reasons why you might want
+            // to, say, copy the Message object or some other 'immutable' here
+            if (message.thread.id === thread.id) {
+              message.isRead = true;
+            }
+            return message;
+          });
+        };
+      })
+      .subscribe(this.updates);
   }
 
   // 添加Message的方法
