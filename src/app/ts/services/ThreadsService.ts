@@ -19,6 +19,11 @@ export class ThreadsService {
   currentThread: Subject<Thread> =
     new BehaviorSubject<Thread>(new Thread());
 
+  // `currentThreadMessages` contains the set of messages for the currently
+  // selected thread
+  // 当前已选Thread的Message列表（currentThreadMessages流）
+  currentThreadMessages: Observable<Message[]>;
+
   constructor(private messagesService: MessagesService) {
     this.threads = messagesService.messages
       .map((messages: Message[]) => {
@@ -45,6 +50,25 @@ export class ThreadsService {
         let threads: Thread[] = _.values(threadGroups);
         return _.sortBy(threads, (t: Thread) => t.lastMessage.sentAt).reverse();
       });
+
+    // 获取当前已选Thread的Message列表
+    // 合并currentThreadMessages流与messagesService.messages流，二者有任何一个改变了，就发出一些东西
+    this.currentThreadMessages = this.currentThread
+      .combineLatest(messagesService.messages,
+        (currentThread: Thread, messages: Message[]) => {
+          if (currentThread && messages.length > 0) {
+            return _.chain(messages)
+              .filter((message: Message) =>
+                (message.thread.id === currentThread.id))
+              .map((message: Message) => {
+                message.isRead = true;
+                return message;
+              })
+              .value();
+          } else {
+            return [];
+          }
+        });
 
     // currentThread发出单个Thread，由messagesService.markThreadAsRead接受，然后把这个Thread中的所有Message都标记为已读
     this.currentThread
