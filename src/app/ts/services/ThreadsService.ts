@@ -11,8 +11,13 @@ export class ThreadsService {
   threads: Observable<{ [key: string]: Thread }>;
 
   // `orderedThreads` contains a newest-first chronological list of threads
-  // 按时间逆序排列的Thread列表
+  // 按时间逆序排列的Thread列表（orderedThreads流）
   orderedThreads: Observable<Thread[]>;
+
+  // `currentThread` contains the currently selected thread
+  // 当前已选的Thread（currentThread流）
+  currentThread: Subject<Thread> =
+    new BehaviorSubject<Thread>(new Thread());
 
   constructor(private messagesService: MessagesService) {
     this.threads = messagesService.messages
@@ -40,6 +45,11 @@ export class ThreadsService {
         let threads: Thread[] = _.values(threadGroups);
         return _.sortBy(threads, (t: Thread) => t.lastMessage.sentAt).reverse();
       });
+  }
+
+  // 设置当前Thread
+  setCurrentThread(newThread: Thread): void {
+    this.currentThread.next(newThread);
   }
 
 }
