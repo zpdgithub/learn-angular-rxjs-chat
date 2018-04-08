@@ -47,3 +47,28 @@ export class ChatThread implements OnInit {
     event.preventDefault(); // 确保我们不会跳转到其他页面
   }
 }
+
+@Component({
+  selector: 'chat-threads',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <!-- conversations -->
+    <div class="row">
+      <div class="conversation-wrap">
+
+        <chat-thread
+             *ngFor="let thread of threads | async"
+             [thread]="thread">
+        </chat-thread>
+
+      </div>
+    </div>
+  `
+})
+export class ChatThreads {
+  threads: Observable<any>;
+
+  constructor(private threadsService: ThreadsService) {
+    this.threads = threadsService.orderedThreads;
+  }
+}
