@@ -33,3 +33,6 @@ export class ThreadsService {
   }
 
 }
+export const threadsServiceInjectables: Array<any> = [
+  ThreadsService
+];
