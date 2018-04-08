@@ -61,7 +61,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-misused-new": true,
@@ -130,8 +130,8 @@
       "kebab-case"
     ],
     "no-output-on-prefix": true,
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
+    "use-input-property-decorator": false,
+    "use-output-property-decorator": false,
     "use-host-property-decorator": true,
     "no-input-rename": true,
     "no-output-rename": true,
