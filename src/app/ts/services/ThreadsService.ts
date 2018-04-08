@@ -45,6 +45,10 @@ export class ThreadsService {
         let threads: Thread[] = _.values(threadGroups);
         return _.sortBy(threads, (t: Thread) => t.lastMessage.sentAt).reverse();
       });
+
+    // currentThread发出单个Thread，由messagesService.markThreadAsRead接受，然后把这个Thread中的所有Message都标记为已读
+    this.currentThread
+      .subscribe(this.messagesService.markThreadAsRead);
   }
 
   // 设置当前Thread
