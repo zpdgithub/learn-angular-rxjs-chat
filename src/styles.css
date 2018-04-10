@@ -1,1 +1,330 @@
-/* You can add global styles to this file, and also import other style files */
+@charset "UTF-8";
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.container:before,
+.container:after {
+    content: " ";
+    display: table;
+}
+
+.container:after {
+    clear: both;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        border-radius: 4px;
+    }
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-default .navbar-text {
+    color: #777;
+}
+
+.navbar-text {
+    padding-right: 110px;
+}
+
+@media (min-width: 768px) {
+    .navbar-right {
+        float: right !important;
+        margin-right: -15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-text {
+        float: left;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+.navbar-text {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.media {
+    margin-top: 15px;
+}
+
+.media:first-child {
+    margin-top: 0;
+}
+
+.media,
+.media-body {
+    zoom: 1;
+    overflow: hidden;
+}
+
+.media-body {
+    width: 10000px;
+}
+
+.media-object {
+    display: block;
+}
+
+.media-object.img-thumbnail {
+    max-width: none;
+}
+
+.media-right,
+.media>.pull-right {
+    padding-left: 10px;
+}
+
+.media-left,
+.media>.pull-left {
+    padding-right: 10px;
+}
+
+.media-left,
+.media-right,
+.media-body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.media-middle {
+    vertical-align: middle;
+}
+
+.media-bottom {
+    vertical-align: bottom;
+}
+
+.media-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.media-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.media-left,
+.media>.pull-left {
+    padding-right: 10px;
+}
+
+.conversation-wrap {
+    box-shadow: -2px 0 3px #ddd;
+    padding: 0;
+}
+
+@media (min-width: 1200px) {
+    .conversation-wrap {
+        width: 25%;
+    }
+}
+
+.conversation-wrap .conversation {
+    position: relative;
+    display: block;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+}
+
+.conversation-wrap .conversation .avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.conversation-wrap .conversation .div-link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+    background-color: white;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.chat-window {
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    float: right;
+    margin-left: 10px;
+}
+
+.panel-container {
+    float: left;
+}
+
+.chat-window>div>.panel {
+    border-radius: 5px 5px 0 0;
+}
+
+.chat-window .panel {
+    margin-bottom: 0px;
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.chat-window .top-bar {
+    background: #666;
+    color: white;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-default>.panel-heading {
+    color: #333333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.chat-window .msg-container-base {
+    background: #e5e5e5;
+    margin: 0;
+    padding: 0 10px 10px;
+    max-height: 300px;
+    overflow-x: hidden;
+}
+
+.img-responsive,
+.chat-window .msg-container .avatar img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 48px;
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chat-window .msg-container {
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.chat-window .messages>p {
+    font-size: 13px;
+    margin: 0 0 0.2rem 0;
+}
+
+.chat-window .messages>.time {
+    font-size: 11px;
+    color: #ccc;
+}
+
+.row,
+.chat-window-container,
+.chat-window .msg-container {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.chat-window .messages {
+    background: white;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+}
+
+.chat-window .msg-receive {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.img-responsive,
+.chat-window .msg-container .avatar img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
